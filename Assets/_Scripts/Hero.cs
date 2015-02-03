@@ -13,8 +13,11 @@ public class Hero : MonoBehaviour {
 
 	public bool _____________________________;
 
+	public Bounds bounds;
+
 	void Awake(){
 		S = this;
+		bounds = Utils.CombineBoundsOfChildren (this.gameObject);
 	}
 
 	// Use this for initialization
