@@ -35,6 +35,13 @@ public class Hero : MonoBehaviour {
 		pos.x += xAxis * speed * Time.deltaTime;
 		pos.y += yAxis * speed * Time.deltaTime;
 		transform.position = pos;
+		bounds.center = transform.position;
+
+		Vector3 off = Utils.ScreenBoundsCheck (bounds, BoundsTest.onScreen);
+		if (off != Vector3.zero) {
+			pos -= off;
+			transform.position = pos;
+		}
 
 		// add rotation to make it feel more dynamic
 		transform.rotation = Quaternion.Euler (yAxis * pitchMult, xAxis * rollMult, 0);
