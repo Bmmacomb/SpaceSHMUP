@@ -46,4 +46,7 @@ public class Hero : MonoBehaviour {
 		// add rotation to make it feel more dynamic
 		transform.rotation = Quaternion.Euler (yAxis * pitchMult, xAxis * rollMult, 0);
 	}
+	void OnTriggerEnter(Collider other){
+		print ("triggered: " + other.gameObject.name);
+	}
 }

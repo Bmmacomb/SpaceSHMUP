@@ -46,6 +46,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Enemy.cs" />
+     <Compile Include="Assets\Main.cs" />
      <Compile Include="Assets\_Scripts\Hero.cs" />
      <Compile Include="Assets\_Scripts\Shield.cs" />
      <Compile Include="Assets\_Scripts\Utils.cs" />
