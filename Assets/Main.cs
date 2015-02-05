@@ -33,6 +33,13 @@ public class Main : MonoBehaviour {
 		Invoke ("SpawnEnemy", enemySpawnRate);
 	}
 
+	public void DelayedRestart(float delay){
+		Invoke ("Restart", delay);
+	}
+	public void Restart(){
+		Application.LoadLevel ("Scene0");
+	}
+
 	// Use this for initialization
 	void Start () {
 	

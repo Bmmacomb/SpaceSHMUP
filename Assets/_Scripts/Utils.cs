@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -125,7 +125,7 @@ public class Utils : MonoBehaviour {
 			}
 
 			return(off);
-			////   2/5   RESUME HERE_________________________________________________________________
+		
 			// the onsereen test determines what offset would have to be applied to keep lilb inside bigb
 		case BoundsTest.onScreen:
 			if (bigB.Contains(lilB.min)&& bigB.Contains(lilB.max)){
@@ -181,6 +181,19 @@ public class Utils : MonoBehaviour {
 		return (Vector3.zero);
 	}
 
+	//=============================Transform Functions===============================
+	public static GameObject FindTaggedParent(GameObject go){
+		if (go.tag != "Untagged") {
+			return (go);
+		}
+		if (go.transform.parent == null) {
+			return(null);
+		}
+		return(FindTaggedParent (go.transform.parent.gameObject));
+	}
+	public static GameObject FindTaggedParent(Transform t){
+		return(FindTaggedParent (t.gameObject));
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -191,4 +204,5 @@ public class Utils : MonoBehaviour {
 	void Update () {
 	
 	}
+
 }

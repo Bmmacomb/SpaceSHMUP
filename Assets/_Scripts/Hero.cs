@@ -3,13 +3,15 @@ using System.Collections;
 
 public class Hero : MonoBehaviour {
 	static public Hero   S;
+	public float gameRestartDelay = 2f;
 
 	public float speed = 30;
 	public float rollMult = -45;
 	public float pitchMult = 30;
 
 	// status info
-	public float shieldLevel = 1;
+	[SerializeField]
+	private float _shieldLevel = 1;
 
 	public bool _____________________________;
 
@@ -46,7 +48,40 @@ public class Hero : MonoBehaviour {
 		// add rotation to make it feel more dynamic
 		transform.rotation = Quaternion.Euler (yAxis * pitchMult, xAxis * rollMult, 0);
 	}
+
+
+
+	public GameObject lastTriggerGo = null;
+
 	void OnTriggerEnter(Collider other){
-		print ("triggered: " + other.gameObject.name);
+		GameObject go = Utils.FindTaggedParent (other.gameObject);
+		if (go != null) {
+			if (go == lastTriggerGo){
+				return;
+			}
+			lastTriggerGo = go;
+
+			if (go.tag == "Enemy"){
+				shieldLevel--;
+				Destroy(go);
+			}else{
+				print("triggered: " + go.name);
+			}
+		//	print ("triggered: 	" + go.name);
+		} else {
+			print("Triggered: " +other.gameObject.name);
+		}
+	}
+	public float shieldLevel{
+		get{
+			return(_shieldLevel);
+		}
+		set{
+			_shieldLevel = Mathf.Min (value, 4);
+			if (value < 0){
+				Destroy(this.gameObject);
+				Main.S.DelayedRestart(gameRestartDelay);
+			}
+		}
 	}
 }
