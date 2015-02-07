@@ -108,7 +108,7 @@ public class Enemy : MonoBehaviour {
 		remainingDamageFrames = showDamageForFrames;
 	}
 	void UnShowDamage(){
-		print ("llll");
+
 		for (int i = 0; i < materials.Length; i++) {
 			materials[i].color = originalColors[i];	
 		}

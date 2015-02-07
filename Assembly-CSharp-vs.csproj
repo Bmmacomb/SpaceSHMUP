@@ -57,6 +57,7 @@
      <Compile Include="Assets\_Scripts\enemy_1.cs" />
      <Compile Include="Assets\_Scripts\enemy_2.cs" />
      <Compile Include="Assets\_Scripts\enemy_3.cs" />
+     <Compile Include="Assets\_Scripts\enemy_4.cs" />
      <Compile Include="Assets\_Scripts\enemy_5.cs" />
      <None Include="Assets\_Materials\UnlitAlpha.shader" />
  <Reference Include="UnityEngine.UI">
