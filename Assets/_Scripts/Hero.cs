@@ -13,6 +13,8 @@ public class Hero : MonoBehaviour {
 	[SerializeField]
 	private float _shieldLevel = 1;
 
+	public Weapon[] weapons;
+
 	public bool _____________________________;
 
 	public Bounds bounds;
@@ -24,10 +26,13 @@ public class Hero : MonoBehaviour {
 		bounds = Utils.CombineBoundsOfChildren (this.gameObject);
 	}
 
-	// Use this for initialization
-	void Start () {
-	
+	void Start(){
+		ClearWeapons ();
+		weapons [0].SetType (WeaponType.blaster);
 	}
+
+	// Use this for initialization
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -71,6 +76,13 @@ public class Hero : MonoBehaviour {
 			if (go.tag == "Enemy"){
 				shieldLevel--;
 				Destroy(go);
+
+			}
+
+
+			else if(go.tag == "PowerUp"){
+				AbsorbPowerUp(go);
+
 			}else{
 				print("triggered: " + go.name);
 			}
@@ -79,6 +91,47 @@ public class Hero : MonoBehaviour {
 			print("Triggered: " +other.gameObject.name);
 		}
 	}
+
+
+	public void AbsorbPowerUp(GameObject go){
+		PowerUp pu = go.GetComponent<PowerUp> ();
+		switch (pu.type) {
+		case WeaponType.shield:
+			shieldLevel++;
+			break;
+		default:
+			if (pu.type == weapons[0].type){
+				Weapon w = GetEmptyWeaponSlot();
+				if (w!= null){
+					w.SetType(pu.type);
+				}
+			}else{
+				ClearWeapons();
+				weapons[0].SetType(pu.type);
+			}
+			break;
+		
+		
+		}
+		pu.AbsorbedBy (this.gameObject);
+
+
+	}
+	Weapon GetEmptyWeaponSlot(){
+		for (int i = 0; i < weapons.Length; i++) {
+			if (weapons[i].type == WeaponType.none){
+				return(weapons[i]);
+			}	
+		}
+		return (null);
+	}
+
+	void ClearWeapons(){
+		foreach (Weapon w in weapons) {
+			w.SetType(WeaponType.none);	
+		}
+	}
+
 	public float shieldLevel{
 		get{
 			return(_shieldLevel);

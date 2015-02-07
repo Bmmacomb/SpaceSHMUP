@@ -9,6 +9,7 @@ public enum WeaponType{
 	torpedo,
 	pulse,
 	Ze_Bomb,
+	HAX,
 
 
 	shield
@@ -39,10 +40,12 @@ public class Weapon : MonoBehaviour {
 	public GameObject collar;
 	public float lastShot;
 
-
+	void Awake(){
+		collar = transform.Find ("Collar").gameObject;
+	}
 	// Use this for initialization
 	void Start () {
-		collar = transform.Find ("Collar").gameObject;
+
 		SetType(_type);
 		if (PROJECTILE_ANCHOR == null) {
 			GameObject go = new GameObject("_Projectile_Anchor");
@@ -176,6 +179,15 @@ public class Weapon : MonoBehaviour {
 			p = MakeProjectile();
 			p.rigidbody.velocity = Vector3.up * def.velocity;
 			break;
+
+
+		case WeaponType.HAX:
+			p = MakeProjectile();
+			p.rigidbody.velocity = new Vector3(-.6f,.5f,0)*def.velocity;
+			p = MakeProjectile();
+			p.rigidbody.velocity = new Vector3(.6f,.5f,0)*def.velocity;
+			break;
+			
 
 		}
 	}

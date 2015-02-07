@@ -41,6 +41,41 @@ public class PowerUp : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		cube.transform.rotation = Quaternion.Euler (rotPerSecond * Time.time);
+		float u = (Time.time - (birthTime + lifeTime)) / fadeTime;
+		if (u >= 1) {
+			Destroy(this.gameObject);
+			return;
+		}
+		if (u > 0) {
+			Color c = cube.renderer.material.color;
+			c.a = 1f - u;
+			cube.renderer.material.color = c;
+			c = letter.color;
+			c.a = 1f - (u*0.5f);
+			letter.color =c;
+		}
 	
+	}
+
+	public void SetType(WeaponType wt){
+		WeaponDefinition def = Main.GetWeaponDefinition (wt);
+		cube.renderer.material.color = def.color;
+		letter.text = def.letter;
+		type = wt;
+	}
+
+	public void AbsorbedBy(GameObject target){
+		Destroy (this.gameObject);
+	}
+
+	void CheckOffScreen(){
+		if (Utils.ScreenBoundsCheck (cube.collider.bounds, BoundsTest.offScreen) != Vector3.zero) {
+			Destroy(this.gameObject);	
+		}
+
+	
+
+
 	}
 }

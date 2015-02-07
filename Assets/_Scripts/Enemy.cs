@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour {
 	public float health = 100;
 	public int score = 100;
 	public int showDamageForFrames = 2;
+	public float powerUpDropChance = 1f;
+
 
 	public bool ______________;
 	public Color[] originalColors;
@@ -87,6 +89,7 @@ public class Enemy : MonoBehaviour {
 			health -= Main.W_DEFS[p.type].damageOnHit;
 
 			if (health <= 0){
+				Main.S.ShipDestroyed(this);
 				Destroy (this.gameObject);
 			
 			}
@@ -105,6 +108,7 @@ public class Enemy : MonoBehaviour {
 		remainingDamageFrames = showDamageForFrames;
 	}
 	void UnShowDamage(){
+		print ("llll");
 		for (int i = 0; i < materials.Length; i++) {
 			materials[i].color = originalColors[i];	
 		}
