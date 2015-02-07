@@ -16,6 +16,8 @@ public class Hero : MonoBehaviour {
 	public bool _____________________________;
 
 	public Bounds bounds;
+	public delegate void WeaponFireDelegate();
+	public WeaponFireDelegate fireDelegate;
 
 	void Awake(){
 		S = this;
@@ -47,6 +49,11 @@ public class Hero : MonoBehaviour {
 
 		// add rotation to make it feel more dynamic
 		transform.rotation = Quaternion.Euler (yAxis * pitchMult, xAxis * rollMult, 0);
+
+		// use fire del to fire if axis jump is pressed and the delegate is not null
+		if (Input.GetAxis ("Jump") == 1 && fireDelegate != null) {
+			fireDelegate();	
+		}
 	}
 
 

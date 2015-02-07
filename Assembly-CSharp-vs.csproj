@@ -48,6 +48,9 @@
   <ItemGroup>
      <Compile Include="Assets\Enemy.cs" />
      <Compile Include="Assets\Main.cs" />
+     <Compile Include="Assets\PowerUp.cs" />
+     <Compile Include="Assets\Projectile.cs" />
+     <Compile Include="Assets\Weapon.cs" />
      <Compile Include="Assets\_Scripts\Hero.cs" />
      <Compile Include="Assets\_Scripts\Shield.cs" />
      <Compile Include="Assets\_Scripts\Utils.cs" />
